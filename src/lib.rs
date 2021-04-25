@@ -84,12 +84,13 @@ mod test {
             false,
             Epoch::default(),
         );
-        let mut instruction_data: Vec<u8> = Vec::new();
-        instruction_data.push(28);
-        instruction_data.push(62);
-        instruction_data.push(0);
-        instruction_data.push(0);
-
+        // let mut instruction_data: Vec<u8> = Vec::new();
+        // instruction_data.push(28);
+        // instruction_data.push(62);
+        // instruction_data.push(0);
+        // instruction_data.push(0);
+        let mut instruction_data: [u8; 4] = [0; 4];
+        LittleEndian::write_u32(&mut instruction_data[0..], 15900);
 
         let accounts = vec![account];
 
