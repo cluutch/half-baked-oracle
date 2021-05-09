@@ -24,10 +24,10 @@ fn process_instruction(
         instruction_data
     );
 
-    // Get the account holding quote data
+    // Get the account iterator
     let accounts_iter = &mut accounts.iter();
 
-    // Get the account to say hello to
+    // Get the account holding quote data
     let account = next_account_info(accounts_iter)?;
 
     // The account must be owned by the program in order to modify its data
@@ -58,11 +58,8 @@ fn process_instruction(
 mod test {
     use {
         super::*,
-        // assert_matches::*,
-        // solana_program::instruction::{AccountMeta, Instruction},
         solana_program::clock::Epoch,
         solana_program_test::*,
-        // solana_sdk::{signature::Signer, transaction::Transaction},
     };
 
     #[tokio::test]
@@ -97,28 +94,5 @@ mod test {
         assert_eq!(LittleEndian::read_u32(&accounts[0].data.borrow()), 0);
         process_instruction(&program_id, &accounts, &instruction_data).unwrap();
         assert_eq!(LittleEndian::read_u32(&accounts[0].data.borrow()), 15900);
-
-
-        // let program_id = Pubkey::new_unique();
-
-        // let (mut banks_client, payer, recent_blockhash) = ProgramTest::new(
-        //     "bpf_program_template",
-        //     program_id,
-        //     processor!(process_instruction),
-        // )
-        // .start()
-        // .await;
-
-        // let mut transaction = Transaction::new_with_payer(
-        //     &[Instruction {
-        //         program_id,
-        //         accounts: vec![AccountMeta::new(payer.pubkey(), false)],
-        //         data: vec![1, 2],
-        //     }],
-        //     Some(&payer.pubkey()),
-        // );
-        // transaction.sign(&[&payer], recent_blockhash);
-
-        // assert_matches!(banks_client.process_transaction(transaction).await, Ok(()));
     }
 }
