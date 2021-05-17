@@ -1,5 +1,5 @@
 [package]
-name = "bpf-program-template"
+name = "half-baked"
 version = "0.1.0"
 edition = "2018"
 license = "WTFPL"
